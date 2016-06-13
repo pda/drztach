@@ -1,3 +1,5 @@
+#include "display.h"
+
 void setup();
 void loop();
 
@@ -10,6 +12,8 @@ int main() {
 }
 
 void setup() {
+  display_setup();
+  display_test();
 }
 
 void loop() {
