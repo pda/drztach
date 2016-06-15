@@ -18,7 +18,7 @@ COMPILEFLAGS = -Wall -Werror -g -Os -mmcu=$(MCU) \
 CFLAGS = -std=c99 $(COMPILEFLAGS)
 ASFLAGS = $(COMPILEFLAGS)
 
-SOURCES = main.c display.c
+SOURCES = main.c display.c capture.c sample_buffer.c
 OBJECTS = $(SOURCES:.c=.o)
 
 .PHONY: all
