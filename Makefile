@@ -37,3 +37,10 @@ firmware.hex: firmware.elf
 
 firmware.elf: $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $(OBJECTS)
+
+.PHONY: test
+test:
+	./sample_buffer_test
+
+sample_buffer_test: sample_buffer_test.c sample_buffer.c
+	clang -o sample_buffer_test $<

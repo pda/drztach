@@ -1,3 +1,4 @@
 *.o
 firmware.hex
 firmware.elf
+*_test
