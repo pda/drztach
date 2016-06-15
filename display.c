@@ -35,14 +35,30 @@ uint8_t tach_mapd[] = {
   0b11111100 // 10
 };
 
+uint8_t tach_errord[] = {
+  0b00000000, // 0
+  0b10000000, // 1: TACH_ERR_DISPLAY_OOB
+  0
+};
+
 void display_setup() {
   DDRC |= TACH_MASKC;
   DDRD |= TACH_MASKD;
 }
 
 void display_show(uint8_t n) {
-  PORTC = (PORTC & ~TACH_MASKC) | tach_mapc[n];
-  PORTD = (PORTD & ~TACH_MASKD) | tach_mapd[n];
+  if (n >= sizeof(tach_mapc)) {
+    display_error(TACH_ERR_DISPLAY_OOB);
+    _delay_ms(10);
+  } else {
+    PORTC = (PORTC & ~TACH_MASKC) | tach_mapc[n];
+    PORTD = (PORTD & ~TACH_MASKD) | tach_mapd[n];
+  }
+}
+
+void display_error(tach_err_t n) {
+  PORTC = (PORTC & ~TACH_MASKC);
+  PORTD = (PORTD & ~TACH_MASKD) | tach_errord[n];
 }
 
 void display_test() {
